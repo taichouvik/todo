@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <title>Todo List App: CRUD</title>
+  <link href="style.css" rel="stylesheet" media="all" />
+</head>
+
+<body>
+  <table class="styled-table">
+    <thead>
+      <tr>
+        <th >Id</th>
+        <th >Task</th>
+        <th ></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr th:each="todo : ${todos}">
+        <td scope="row" th:text=${todo.id}></td>
+        <td th:text=${todo.todoItem}></td>
+        <td>
+          <form th:action="@{/todoDelete/{id}(id=${todo.id})}" method="POST" enctype="multipart/form-data">
+            <button type="submit" class="btn btn-danger btn-sm text-white">Delete</button>
+          </form>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <form method="POST" enctype="multipart/form-data">
+    <table>
+      <tr>
+        <td>
+          <p>Id: <input type="text" th:name="id" /></p>
+        </td>
+        <td>
+          <p>Item: <input type="text" th:name="todoItem" /></p>
+        </td>
+      </tr>
+      <table>
+        <tr>
+          <td><button type="submit" formaction="/todoAdd">Add</button></td>
+          <td><button type="submit" formaction="/todoUpdate">Update</button></td>
+        </tr>
+      </table>
+    </table>
+  </form>
+</body>
+
+</html>
